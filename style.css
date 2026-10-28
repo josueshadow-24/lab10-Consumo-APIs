@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 20px;
+}
+
+.contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #7f8c8d;
+    font-size: 15px;
+}
+
+.seccion-busqueda {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.seccion-busqueda input {
+    width: 60%;
+    max-width: 400px;
+    padding: 12px 16px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.seccion-busqueda input:focus {
+    border-color: #3498db;
+}
+
+.seccion-busqueda button {
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.seccion-busqueda button:hover {
+    background-color: #2980b9;
+}
+
+.grid-usuarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card-usuario {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-usuario img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #3498db;
+    margin-bottom: 12px;
+}
+
+.card-usuario h3 {
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.card-usuario p {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+
+.card-usuario .pais {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 12px;
+    background-color: #e8f4fc;
+    color: #2980b9;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.estado-mensaje {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.estado-mensaje.error {
+    color: #e74c3c;
+}
+
+.estado-mensaje.info {
+    color: #3498db;
+}
