@@ -5,6 +5,36 @@ const contenedorUsuarios = document.getElementById('contenedor-usuarios');
 
 const API_URL = 'https://randomuser.me/api/?results=6';
 
+let listaUsuariosGlobal = [];
+
+function renderizarUsuarios(usuarios) {
+    if (usuarios.length === 0) {
+        contenedorUsuarios.innerHTML = '';
+        estadoMensaje.className = 'estado-mensaje info';
+        estadoMensaje.textContent = 'No se encontraron usuarios que coincidan con la búsqueda.';
+        return;
+    }
+
+    estadoMensaje.textContent = '';
+    
+    const tarjetasHTML = usuarios.map(usuario => {
+        const { picture, name, email, phone, location } = usuario;
+        const nombreCompleto = `${name.first} ${name.last}`;
+
+        return `
+            <article class="card-usuario">
+                <img src="${picture.large}" alt="Foto de ${nombreCompleto}">
+                <h3>${nombreCompleto}</h3>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Teléfono:</strong> ${phone}</p>
+                <span class="pais">${location.country}</span>
+            </article>
+        `;
+    }).join('');
+
+    contenedorUsuarios.innerHTML = tarjetasHTML;
+}
+
 async function obtenerUsuarios() {
     contenedorUsuarios.innerHTML = '';
     estadoMensaje.className = 'estado-mensaje info';
@@ -19,10 +49,9 @@ async function obtenerUsuarios() {
 
         const datos = await respuesta.json();
 
-        estadoMensaje.textContent = '';
-        
-        console.log('Datos recibidos con éxito:', datos.results);
-        return datos.results;
+        listaUsuariosGlobal = datos.results;
+
+        renderizarUsuarios(listaUsuariosGlobal);
 
     } catch (error) {
         console.error('Detalle del error:', error);
@@ -32,4 +61,16 @@ async function obtenerUsuarios() {
     }
 }
 
+function filtrarUsuarios() {
+    const textoBusqueda = inputBusqueda.value.toLowerCase().trim();
+
+    const usuariosFiltrados = listaUsuariosGlobal.filter(usuario => {
+        const nombreCompleto = `${usuario.name.first} ${usuario.name.last}`.toLowerCase();
+        return nombreCompleto.includes(textoBusqueda);
+    });
+
+    renderizarUsuarios(usuariosFiltrados);
+}
+
 btnCargar.addEventListener('click', obtenerUsuarios);
+inputBusqueda.addEventListener('input', filtrarUsuarios);
